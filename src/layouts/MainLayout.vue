@@ -5,10 +5,13 @@
         <q-toolbar-title> Victoria Nguyen </q-toolbar-title>
 
         <div class="gt-sm">
-          <q-btn flat label="ABOUT" />
-          <q-btn flat label="ARTICLES" />
-          <q-btn flat label="BOOKS" />
-          <q-btn flat label="INSTAGRAM" />
+          <q-btn
+            flat
+            v-for="item in essentialLinks"
+            :key="item.title"
+            text-transform="uppercase"
+            ><a :href="item.link">{{ item.title }}</a>
+          </q-btn>
         </div>
 
         <div class="lt-md">
@@ -28,7 +31,13 @@
       </q-page-container>
       <q-footer>
         <div>© Victoria Nguyen 2022. Built using Quasar. Hosted on GitHub.</div>
-        <div></div>
+        <div>
+          <!-- <RenderSVG
+            v-for="item in socialMediaList"
+            :key="item.icon"
+            v-bind="item"
+          /> -->
+        </div>
       </q-footer>
     </q-layout>
   </div>
@@ -40,17 +49,18 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
+import EssentialLink from "src/components/EssentialLink.vue";
+import RenderSVGVue from "src/components/RenderSVG.vue";
 
 const socialMediaList = [
   {
-    icon: "img:../assets/twitter.svg",
+    icon: "src/assets/facebook.svg",
     link: "https://www.facebook.com/profile.php?id=100009945305694",
   },
-  {
-    icon: "https://www.instagram.com/victorianguyen.md/",
-    link: "https://twitter.com/MedInnovatorMD",
-  },
+  // {
+  //   icon: "https://www.instagram.com/victorianguyen.md/",
+  //   link: "https://twitter.com/MedInnovatorMD",
+  // },
 ];
 
 const dropdownList = [
@@ -77,11 +87,13 @@ export default defineComponent({
 
   components: {
     EssentialLink,
+    // RenderSVG,
   },
 
   setup() {
     return {
       essentialLinks: dropdownList,
+      renderSVG: socialMediaList,
     };
   },
 });
